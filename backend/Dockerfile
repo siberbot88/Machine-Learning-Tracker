@@ -28,7 +28,7 @@ WORKDIR /app
 COPY . .
 
 # Install composer dependencies
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+RUN composer install --no-interaction --no-dev --optimize-autoloader --ignore-platform-req=ext-mongodb
 
 # Expose port
 ENV PORT=8000
