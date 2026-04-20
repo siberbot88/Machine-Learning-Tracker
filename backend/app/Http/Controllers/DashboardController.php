@@ -12,7 +12,16 @@ class DashboardController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $userId = (string) $request->user()->_id;
+        $user = $request->user();
+        $userId = (string) $user->_id;
+
+        // Auto-heal logic: if an existing user logged in before the seeder was fixed,
+        // they will have 0 tasks. This ensures they always get seeded.
+        if ($user->tasks()->count() === 0) {
+            $seeder = new \Database\Seeders\RoadmapSeeder();
+            $seeder->seedForUser($userId);
+        }
+
         $stats = $this->dashboardService->getStats($userId);
 
         return response()->json($stats);

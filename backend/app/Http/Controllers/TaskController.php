@@ -15,7 +15,15 @@ class TaskController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $userId = (string) $request->user()->_id;
+        $user = $request->user();
+        $userId = (string) $user->_id;
+
+        // Auto-heal logic: if an existing user has 0 tasks, seed them instantly.
+        if ($user->tasks()->count() === 0) {
+            $seeder = new \Database\Seeders\RoadmapSeeder();
+            $seeder->seedForUser($userId);
+        }
+
         $filters = $request->only(['week', 'category', 'status', 'priority', 'search']);
 
         $tasks = $this->taskService->buildFilteredQuery($userId, $filters)->get();
