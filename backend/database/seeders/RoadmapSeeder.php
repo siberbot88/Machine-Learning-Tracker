@@ -13,28 +13,34 @@ class RoadmapSeeder extends Seeder
     {
         $users = User::all();
         if ($users->isEmpty()) {
-            $this->command->error('No users found. Run UserSeeder first.');
+            if (isset($this->command)) {
+                $this->command->error('No users found. Run UserSeeder first.');
+            }
             return;
         }
-
-        $baseDate = Carbon::now()->startOfWeek();
-        $roadmap = $this->getRoadmapData();
         
         foreach ($users as $user) {
-            $userId = (string) $user->_id;
+            $this->seedForUser((string) $user->_id);
+        }
+    }
 
-            foreach ($roadmap as $weekData) {
-                $weekNum = $weekData['week'];
-                $weekStart = $baseDate->copy()->addWeeks($weekNum - 1);
-                $weekEnd = $weekStart->copy()->addDays(6);
+    public function seedForUser(string $userId): void
+    {
+        $baseDate = Carbon::now()->startOfWeek();
+        $roadmap = $this->getRoadmapData();
 
-                foreach ($weekData['tasks'] as $taskData) {
-                    Task::updateOrCreate(
-                        [
-                            'user_id' => $userId,
-                            'week_number' => $weekNum,
-                            'title' => $taskData['title'],
-                        ],
+        foreach ($roadmap as $weekData) {
+            $weekNum = $weekData['week'];
+            $weekStart = $baseDate->copy()->addWeeks($weekNum - 1);
+            $weekEnd = $weekStart->copy()->addDays(6);
+
+            foreach ($weekData['tasks'] as $taskData) {
+                Task::updateOrCreate(
+                    [
+                        'user_id' => $userId,
+                        'week_number' => $weekNum,
+                        'title' => $taskData['title'],
+                    ],
                         [
                             'user_id' => $userId,
                             'week_number' => $weekNum,
