@@ -67,7 +67,6 @@ class RoadmapSeeder extends Seeder
                 }
             }
         }
-    }
 
     private function getRoadmapData(): array
     {

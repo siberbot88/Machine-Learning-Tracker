@@ -7,7 +7,6 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Database\Seeders\RoadmapSeeder;
 
 class GoogleAuthController extends Controller
 {
@@ -65,7 +64,7 @@ class GoogleAuthController extends Controller
 
             // Ensure the user has the roadmap tasks populated
             if ($user->tasks()->count() === 0) {
-                $seeder = new RoadmapSeeder();
+                $seeder = new \Database\Seeders\RoadmapSeeder();
                 $seeder->seedForUser((string) $user->_id);
             }
 
