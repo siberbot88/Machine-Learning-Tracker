@@ -251,14 +251,6 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {isLoginState && (
-            <div className="mt-8 pt-6 border-t border-border animate-slideIn opacity-0 animation-delay-500">
-              <p className="text-[11px] text-text-muted text-center leading-relaxed">
-                Demo credentials:<br />
-                <code className="px-1.5 py-1 bg-surface-alt border border-border-light rounded font-mono text-text mt-1.5 inline-block">admin@roadmap.test</code> / <code className="px-1.5 py-1 bg-surface-alt border border-border-light rounded font-mono text-text mt-1.5 inline-block">password</code>
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </div>
