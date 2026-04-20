@@ -7,30 +7,35 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Database\Seeders\RoadmapSeeder;
 
 class GoogleAuthController extends Controller
 {
     /**
      * Redirect the user to the Google authentication page.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function redirect()
     {
+        /** @var \Laravel\Socialite\Two\GoogleProvider $driver */
+        $driver = Socialite::driver('google');
         return response()->json([
-            'url' => Socialite::driver('google')->stateless()->redirect()->getTargetUrl()
+            'url' => $driver->stateless()->redirect()->getTargetUrl()
         ]);
     }
 
     /**
      * Obtain the user information from Google.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function callback()
     {
         try {
-            $googleUser = Socialite::driver('google')->stateless()->user();
+            /** @var \Laravel\Socialite\Two\GoogleProvider $driver */
+            $driver = Socialite::driver('google');
+            $googleUser = $driver->stateless()->user();
             
             // Check if user already exists
             $user = User::where('google_id', $googleUser->getId())
@@ -60,7 +65,7 @@ class GoogleAuthController extends Controller
 
             // Ensure the user has the roadmap tasks populated
             if ($user->tasks()->count() === 0) {
-                $seeder = new \Database\Seeders\RoadmapSeeder();
+                $seeder = new RoadmapSeeder();
                 $seeder->seedForUser((string) $user->_id);
             }
 

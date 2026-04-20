@@ -22,6 +22,10 @@ class RoadmapSeeder extends Seeder
         foreach ($users as $user) {
             $this->seedForUser((string) $user->_id);
         }
+
+        if (isset($this->command)) {
+            $this->command->info('Roadmap seeded: 12 weeks of ML/DL tasks created for ' . $users->count() . ' users.');
+        }
     }
 
     public function seedForUser(string $userId): void
@@ -63,8 +67,6 @@ class RoadmapSeeder extends Seeder
                 }
             }
         }
-
-        $this->command->info('Roadmap seeded: 12 weeks of ML/DL tasks created for ' . $users->count() . ' users.');
     }
 
     private function getRoadmapData(): array
