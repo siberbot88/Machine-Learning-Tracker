@@ -119,7 +119,7 @@ export default function ProfilePage() {
                 return (
                   <button
                     key={opt.id}
-                    onClick={() => setTheme(opt.id)}
+                    onClick={() => setTheme(opt.id as 'light' | 'dark' | 'dimmed')}
                     className={`p-4 rounded-xl border text-left transition-all ${
                       theme === opt.id 
                         ? 'border-primary bg-primary-50 ring-1 ring-primary' 

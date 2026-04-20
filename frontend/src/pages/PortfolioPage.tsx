@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { getPortfolio } from '../api/tasks';
 import type { Task } from '../types';
 import { Loader2, Briefcase, ExternalLink, FileText, Download, CheckCircle2, AlertCircle } from 'lucide-react';
-import { useTranslation } from '../lib/i18n';
+// import { useTranslation } from '../lib/i18n';
 
 export default function PortfolioPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   useEffect(() => {
     fetchPortfolio();

@@ -43,7 +43,7 @@ export default function CompletionRing({ completed, total, label = 'Overall' }: 
               </Pie>
               <Tooltip
                 contentStyle={{ borderRadius: 12, border: '1px solid #E2E8F0', fontSize: 12 }}
-                formatter={(value: number) => [`${value} tasks`]}
+                formatter={(value: any) => [`${value} tasks`]}
               />
             </PieChart>
           </ResponsiveContainer>

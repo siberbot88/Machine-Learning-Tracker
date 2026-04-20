@@ -55,7 +55,7 @@ export default function ProgressTrend({ weeks }: ProgressTrendProps) {
           />
           <Tooltip
             contentStyle={{ borderRadius: 12, border: '1px solid #E2E8F0', fontSize: 12 }}
-            formatter={(value: number) => [`${value}%`, 'Cumulative Progress']}
+            formatter={(value: any) => [`${value}%`, 'Cumulative Progress']}
           />
           <Area
             type="monotone"

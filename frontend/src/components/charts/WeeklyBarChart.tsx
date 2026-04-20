@@ -54,7 +54,7 @@ export default function WeeklyBarChart({ weeks, currentWeek }: WeeklyBarChartPro
           />
           <Tooltip
             contentStyle={{ borderRadius: 12, border: '1px solid #E2E8F0', fontSize: 12 }}
-            formatter={(value: number, name: string) => [value, name === 'completed' ? 'Completed' : 'Remaining']}
+            formatter={(value: any, name: any) => [value, name === 'completed' ? 'Completed' : 'Remaining']}
           />
           <Bar dataKey="completed" stackId="a" radius={[0, 0, 0, 0]} fill={CHART_COLORS.accent}>
             {data.map((entry, i) => (

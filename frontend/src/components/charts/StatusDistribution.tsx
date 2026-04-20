@@ -39,7 +39,7 @@ export default function StatusDistribution({ notStarted, inProgress, done, block
           </Pie>
           <Tooltip
             contentStyle={{ borderRadius: 12, border: '1px solid #E2E8F0', fontSize: 12 }}
-            formatter={(value: number) => [value, 'Tasks']}
+            formatter={(value: any) => [value, 'Tasks']}
           />
           <Legend
             verticalAlign="bottom"
