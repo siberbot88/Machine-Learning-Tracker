@@ -218,7 +218,8 @@ export default function LoginPage() {
               type="button"
               onClick={async () => {
                 try {
-                  const response = await fetch('http://localhost:8000/api/auth/google/redirect');
+                  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+                  const response = await fetch(`${apiUrl}/auth/google/redirect`);
                   const data = await response.json();
                   if (data.url) {
                     window.location.href = data.url;
