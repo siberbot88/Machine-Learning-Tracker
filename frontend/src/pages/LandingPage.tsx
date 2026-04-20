@@ -92,7 +92,7 @@ export default function LandingPage() {
                 Start Your Journey <ArrowRight className="w-5 h-5" />
               </Link>
               <a
-                href="https://github.com"
+                href="https://github.com/siberbot88/Machine-Learning-Tracker"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-medium border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 active:scale-95 transition-all shadow-sm"
